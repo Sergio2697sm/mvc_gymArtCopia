@@ -1,22 +1,22 @@
 <?php 
-// ini_set('memory_limit', '1024M');
 
 class Mysql extends Conexion {
 
     private $conexion;
     private $strquery;
     private $arrvalues;
-
+    
     function __construct()
     {
         $this->conexion = new Conexion();
         $this->conexion = $this->conexion->conect();
     }
-
-      //devuelve todos los registros
-      public function select_all(string $query) {
-        $this ->strquery = $query;
-        $result = $this ->conexion->prepare($this->strquery);
+    
+    //devuelve todos los registros
+    public function select_all(string $query) {
+        $this->strquery = $query;
+        
+        $result = $this->conexion->prepare($this->strquery);
         $result->execute();
         $data = $result->fetch(PDO::FETCH_ASSOC);
         return $data;
@@ -29,7 +29,7 @@ class Mysql extends Conexion {
         $this->strquery = $query;
         $this->arrValues = $arrValues;
 
-        $insert = $this ->conexion-> prepare($this -> strquery);
+        $insert = $this->conexion->prepare($this -> strquery);
 
         $resInsert = $insert->execute($this->arrvalues);
 
@@ -71,5 +71,3 @@ class Mysql extends Conexion {
         return $result();
     }
 }
-
-?>

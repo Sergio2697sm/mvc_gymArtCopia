@@ -2,12 +2,13 @@
 class clientesModel extends Mysql
 {
     public $model;
+    
     public function __construct()
     {
-        $this->model = new clientesModel();
+        // $this->model = new clientesModel();
         parent::__construct();
     }
-
+    
     public function getClients()
     {
         $sql = "SELECT * FROM clientes";
