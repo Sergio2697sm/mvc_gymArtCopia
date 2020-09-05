@@ -29,5 +29,4 @@ class Clientes extends Controllers
         $data = $this->model->setUser();
         print_r($data);
     }
-
 }
