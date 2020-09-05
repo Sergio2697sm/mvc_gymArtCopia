@@ -9,19 +9,19 @@ class Clientes extends Controllers
 
     public function home()
     {
-        // $data['page_id'] = 1;
+        $data['page_id'] = 1;
         $data['tag_page'] = "GymArt";
         $data['page_title'] = "Clientes";
         $data['page_content'] = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, quis. Perspiciatis repellat perferendis accusamus, ea natus id omnis, ratione alias quo dolore tempore dicta cum aliquid corrupti enim deserunt voluptas.";
-        $data["clientes"] =$this->verUsuarios();
+        $data['clientes'] = $this->verUsuarios();
+        // var_dump($data["clientes"]);
         $this->views->getView($this, "clientes", $data);
     }
 
     public function verUsuarios()
     {
-        // $model = new clientesModel();
         $data = $this->model->getClients();
-        print_r($data);
+        return $data;
     }
     
     public function insertar()

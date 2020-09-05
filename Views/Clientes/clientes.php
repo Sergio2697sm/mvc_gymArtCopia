@@ -11,10 +11,11 @@
 	</section>
 
 	<?php 
-	// var_dump($data["clientes"]) ;
-	// foreach($datos as $dato) {
-	// 	echo '<p>$dato'.$dato['Nombre'].'</p>';
-	// }
+	// var_dump($data);
+	$datos = $data["clientes"] ;
+	foreach($datos as $dato) {
+		echo $dato['Nombre'];
+	}
 	?>
 </body>
 </html>
