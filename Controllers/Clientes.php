@@ -59,5 +59,9 @@ class Clientes extends Controllers
         $this->home();
     }
 
+    public function eliminar($id) {
 
+        $this->model->deleteCliente($id);
+        $this->home();
+    }
 }

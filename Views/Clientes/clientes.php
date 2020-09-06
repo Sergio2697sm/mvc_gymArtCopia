@@ -30,7 +30,7 @@
 					<td><?= $dato["CorreoElectronico"] ?></td>
 					<td><?= $dato["Telefono"] ?></td>
 					<td><button class="btn btn-primary"><a class="text-white" href="modificar/<?= $dato["CodigoCliente"] ?>">Modificar</button></td>
-					<td><button class="btn btn-danger"><a class="text-white" href="Clientes/elimina&id=<?= $dato["CodigoCliente"] ?>">Eliminar</button></td>
+					<td><button class="btn btn-danger"><a class="text-white" href="eliminar/<?= $dato["CodigoCliente"] ?>">Eliminar</button></td>
 				</tr>
 			<?php
 			}

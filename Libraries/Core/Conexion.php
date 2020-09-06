@@ -100,4 +100,24 @@ class Conexion
         # Resetea los parámetros
         $this->parametros = array();
     }
+
+    public function delete($sql)
+    {
+        # Conecta a la BD
+        if (!$this->isConnected) {
+            $this->Connect();
+        }
+
+        try {
+            # Preparar la consulta
+            $resultado = $this->connect->prepare($sql);
+
+            $resultado->execute();
+
+        } catch (PDOException $e) {
+            error_log($this->error = $e->getMessage() . "\nSQL: " . $sql . "\n", 0);
+        }
+        # Resetea los parámetros
+        $this->parametros = array();
+    }
 }

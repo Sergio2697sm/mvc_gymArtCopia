@@ -32,4 +32,10 @@ class clientesModel extends Conexion
         return $viewClient;
     }
 
+    public function deleteCliente($id) {
+        $sql = "DELETE FROM clientes WHERE CodigoCliente = $id";
+        $viewClient = $this->delete($sql);
+        return $viewClient;
+    }
+
 }
