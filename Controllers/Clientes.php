@@ -24,9 +24,40 @@ class Clientes extends Controllers
         return $data;
     }
     
-    public function insertar()
+    public function modificar($id)
     {
-        $data = $this->model->setUser();
-        print_r($data);
+        $data["id"] = $id;
+        $data["titulo"] = "Modificar Clientes";
+        $data["cliente"] = $this->cliente($id);
+        $this->views->getView($this, "clientesModificar", $data);
+
     }
+
+    //ver un solo cliente
+    public function cliente($id) {
+        $data = $this->model->verCliente($id);
+        return $data;
+    }
+
+    public function actualizar() {
+        $this->model->actualizarCliente($_POST["id"],
+        $_POST["nombre"],
+        $_POST["apellidos"],
+        $_POST["domicilio"],
+        $_POST["poblacion"],
+        $_POST["correo"],
+        $_POST["telefono"],
+        $_POST["observaciones"],
+        $_POST["peso"],
+        $_POST["altura"],
+        $_POST["MasaCorporal"],
+        $_POST["edad"],
+        $_POST["actividad"],
+        $_POST["lesiones"],
+        $_POST["activo"]);
+        // return $clientes;
+        $this->home();
+    }
+
+
 }

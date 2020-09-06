@@ -2,7 +2,6 @@
 
 class Conexion
 {
-
     private $connect;
     # @bool ,  Si conectado a la BD
     private $isConnected = false;
@@ -29,9 +28,6 @@ class Conexion
         try {
             $this->connect = new PDO($conecting, $usr, $pwd, $options);
             $this->isConnected = true;
-            // $this->conect = new PDO($conecting, DB_USER, DB_PASS);
-            // $this->conect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            // echo "COnexion exitosa";
         } catch (PDOException $e) {
             $this->conect = "Error de conexion";
             print "¡Error!: " . $e->getMessage() . "<br/>";
@@ -39,7 +35,7 @@ class Conexion
         }
     }
 
-    public function Init($sql)
+    public function select_all($sql)
     {
         # Conecta a la BD
         if (!$this->isConnected) {
@@ -52,18 +48,56 @@ class Conexion
 
             $resultado->execute();
 
-            
             while ($row = $resultado->fetch()) {
                 $model[] = $row;
             }
 
-            // var_dump($model);
             return $model;
-
         } catch (PDOException $e) {
-            # Escribe en el archivo log si ocurre un excepción
             error_log($this->error = $e->getMessage() . "\nSQL: " . $sql . "\n", 0);
         }
     }
 
+    //funcion para un solo cliente
+    public function select($sql)
+    {
+        # Conecta a la BD
+        if (!$this->isConnected) {
+            $this->Connect();
+        }
+
+        try {
+            # Preparar la consulta
+            $resultado = $this->connect->prepare($sql);
+
+
+            $resultado->execute();
+
+            $row = $resultado->fetch();
+
+            return $row;
+        } catch (PDOException $e) {
+            error_log($this->error = $e->getMessage() . "\nSQL: " . $sql . "\n", 0);
+        }
+    }
+
+    public function update($sql)
+    {
+        # Conecta a la BD
+        if (!$this->isConnected) {
+            $this->Connect();
+        }
+
+        try {
+            # Preparar la consulta
+            $resultado = $this->connect->prepare($sql);
+
+            $resultado->execute();
+
+        } catch (PDOException $e) {
+            error_log($this->error = $e->getMessage() . "\nSQL: " . $sql . "\n", 0);
+        }
+        # Resetea los parámetros
+        $this->parametros = array();
+    }
 }

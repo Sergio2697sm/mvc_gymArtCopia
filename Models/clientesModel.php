@@ -1,12 +1,12 @@
 <?php
-class clientesModel extends Mysql
+class clientesModel extends Conexion
 {
-    
+
     public function __construct()
     {
         parent::__construct();
     }
-    
+
     public function getClients()
     {
         $sql = "SELECT * FROM clientes";
@@ -16,41 +16,20 @@ class clientesModel extends Mysql
         return $viewClient;
     }
 
-    // public function setUser($nombre, $apellidos, $domicilio, $poblacion, $correo, $telefono, $observaciones, $peso, $altura, $masaCorporal, $edad, $actividadFisica, $lesiones, $activo)
-    // {
+    public function verCliente($id)
+    {
+        $sql = "SELECT * FROM clientes WHERE CodigoCliente = $id";
+        $viewClient = $this->select($sql);
+        return $viewClient;
+    }
 
-    //     $query_insert = "INSERT INTO clientes (Nombre,Apellidos,Domicilio,Poblacion,CorreoElectronico,Telefono,Observaciones,Peso,Altura,MasaCorporal,Edad,ActividadFisica,Lesiones,Activo)
-    //     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    public function actualizarCliente($codigoCliente, $nombre, $apellidos, $domicilio, $poblacion, $correo, $telefono, $observaciones, $peso, $altura, $masaCorporal, $edad, $actividadFisica, $lesiones)
+    {
+        $sql = "UPDATE clientes SET Nombre='$nombre',Apellidos='$apellidos',Domicilio='$domicilio',Poblacion='$poblacion',
+        CorreoElectronico='$correo',Telefono=$telefono,Observaciones='$observaciones',Peso=$peso,Altura=$altura,MasaCorporal=$masaCorporal,Edad=$edad,
+        ActividadFisica='$actividadFisica',Lesiones='$lesiones' WHERE CodigoCliente = $codigoCliente";
+        $viewClient = $this->update($sql);
+        return $viewClient;
+    }
 
-    //     $arrData = array($nombre, $apellidos, $domicilio, $poblacion, $correo, $telefono, $observaciones, $peso, $altura, $masaCorporal, $edad, $actividadFisica, $lesiones, $activo);
-    //     $request_insert = $this->insert($query_insert, $arrData);
-    //     return $request_insert;
-    // }
-
-
-
-    // public function getClient($id)
-    // {
-    //     $sql = "SELECT * FROM clientes WHere CodigoCliente = $id";
-
-    //     $viewClient = $this->select($sql);
-    //     return $viewClient;
-    // }
-
-    // public function updateClient($id, $nombre, $apellidos, $domicilio, $poblacion, $correo, $telefono, $observaciones, $peso, $altura, $masaCorporal, $edad, $actividadFisica, $lesiones, $activo)
-    // {
-    //     $query_insert = "UPDATE clientes set Nombre= ?,Apellidos = ?,Domicilio = ?,Poblacion = ?,CorreoElectronico = ?,Telefono =?,Observaciones =?,Peso = ?,Altura = ?,MasaCorporal = ?,Edad = ?,ActividadFisica =?,Lesiones =?,Activo = ? SET CodigoCliente = $id)";
-
-    //     $arrData = array($nombre, $apellidos, $domicilio, $poblacion, $correo, $telefono, $observaciones, $peso, $altura, $masaCorporal, $edad, $actividadFisica, $lesiones, $activo);
-    //     $request_insert = $this->update($query_insert, $arrData);
-    //     return $request_insert;
-    // }
-
-    // public function deleteClient($id)
-    // {
-
-    //     $sql = "DELETE FROM clientes WHERE id=$id";
-    //     $result = $this->delete($sql);
-    //     return $result;
-    // }
 }
