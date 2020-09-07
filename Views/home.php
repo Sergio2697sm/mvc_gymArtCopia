@@ -10,6 +10,6 @@
 		<p><?php echo $data['page_content']; ?></p>
 	</section>
 	<a href="Clientes/home">Clientes</a>
-	<a href="">Monitores</a>
+	<a href="Monitores/home">Monitores</a>
 </body>
 </html>
