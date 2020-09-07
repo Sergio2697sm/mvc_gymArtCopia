@@ -9,6 +9,7 @@
 <body>
 	<h1><?php echo $data['page_title']; ?></h1>
 
+<a href="nuevo">Añadir</a>
 	<table>
 		<thead>
 			<tr>

@@ -64,4 +64,32 @@ class Clientes extends Controllers
         $this->model->deleteCliente($id);
         $this->home();
     }
+
+    public function nuevo() {
+
+        $data["titulo"] = "Modificar Clientes";
+        $this->views->getView($this, "clientesInsertar", $data);
+    }
+
+    public function insertar() {
+        $imc = ($_POST["peso"] / ($_POST["altura"] * $_POST["altura"])) * 10000;
+
+        $this->model->insertarClientes(
+        $_POST["nombre"],
+        $_POST["apellidos"],
+        $_POST["domicilio"],
+        $_POST["poblacion"],
+        $_POST["correo"],
+        $_POST["telefono"],
+        $_POST["observaciones"],
+        $_POST["peso"],
+        $_POST["altura"],
+        $imc,
+        $_POST["edad"],
+        $_POST["actividad"],
+        $_POST["lesiones"],
+        $_POST["activo"]
+        );
+        $this->home();
+    }
 }

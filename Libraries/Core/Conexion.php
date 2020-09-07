@@ -93,12 +93,9 @@ class Conexion
             $resultado = $this->connect->prepare($sql);
 
             $resultado->execute();
-
         } catch (PDOException $e) {
             error_log($this->error = $e->getMessage() . "\nSQL: " . $sql . "\n", 0);
         }
-        # Resetea los parámetros
-        $this->parametros = array();
     }
 
     public function delete($sql)
@@ -113,11 +110,33 @@ class Conexion
             $resultado = $this->connect->prepare($sql);
 
             $resultado->execute();
-
         } catch (PDOException $e) {
             error_log($this->error = $e->getMessage() . "\nSQL: " . $sql . "\n", 0);
         }
-        # Resetea los parámetros
-        $this->parametros = array();
+    }
+
+    public function insert($sql)
+    {
+        # Conecta a la BD
+        if (!$this->isConnected) {
+            $this->Connect();
+        }
+
+        try {
+            # Preparar la consulta
+            $resultado = $this->connect->prepare($sql);
+
+            if($resultado ->execute()) {
+
+                $lasInsertId = $this->connect->lastInsertId();
+            }else {
+                $lasInsertId = 0;
+            }
+            return $lasInsertId;
+            // $resultado->execute();
+            // $resultado->lastInsertId();
+        } catch (PDOException $e) {
+            error_log($this->error = $e->getMessage() . "\nSQL: " . $sql . "\n", 0);
+        }
     }
 }

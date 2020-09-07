@@ -32,10 +32,18 @@ class clientesModel extends Conexion
         return $viewClient;
     }
 
-    public function deleteCliente($id) {
+    public function deleteCliente($id)
+    {
         $sql = "DELETE FROM clientes WHERE CodigoCliente = $id";
         $viewClient = $this->delete($sql);
         return $viewClient;
     }
 
+    public function insertarClientes($nombre, $apellidos, $domicilio, $poblacion, $correo, $telefono, $observaciones, $peso, $altura, $masaCorporal, $edad, $actividadFisica, $lesiones, $activo)
+    {
+        $sql = "INSERT INTO clientes (Nombre,Apellidos,Domicilio,Poblacion,CorreoElectronico,Telefono,Observaciones,Peso,Altura,MasaCorporal,Edad,ActividadFisica,Lesiones,Activo)
+        VALUES ('$nombre','$apellidos','$domicilio','$poblacion','$correo',$telefono,'$observaciones',$peso,$altura,$masaCorporal,$edad,'$actividadFisica','$lesiones',$activo)";
+        $viewClient = $this->insert($sql);
+        return $viewClient;
+    }
 }
